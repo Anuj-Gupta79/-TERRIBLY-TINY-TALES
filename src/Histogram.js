@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Bar } from "react-chartjs-2";
 // eslint-disable-next-line no-unused-vars
 import Chart from "chart.js/auto";
 
 export default function Histogram() {
- 
   // eslint-disable-next-line no-unused-vars
   const [words, setWords] = useState([]);
   const [histogramData, setHistogramData] = useState(null);
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate('/');
+  };
+  
 
   useEffect(() => {
     fetch("https://www.terriblytinytales.com/test.txt")
@@ -33,8 +39,11 @@ export default function Histogram() {
           labels: topWords,
           datasets: [
             {
-              label: "Word Frequency",
+              label: "Word's Frequency",
               data: topWords.map((word) => frequency[word]),
+              backgroundColor: "rgba(255, 99, 132, 0.6)",
+              borderColor: "rgba(255, 99, 132, 1)",
+              borderWidth: 1,
             },
           ],
         };
@@ -68,11 +77,46 @@ export default function Histogram() {
   };
 
   return (
-    <div style={{ width: "50vw" }}>
+    <div
+      style={{
+        width: "60vw",
+        height: "75vh",
+        margin: "70px",
+        padding: "20px",
+        border: "3px solid white",
+        borderRadius: "5px",
+        backgroundColor: "#ffe6e6",
+      }}
+    >
       {histogramData && <Bar data={histogramData} />}
       <br />
       <br />
-      <button onClick={handleExport}>Export</button>
+      <div>
+        <button
+          onClick={handleExport}
+          style={{
+            margin: "30px",
+            padding: "10px",
+            width: "20vh",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          Export
+        </button>
+        <button
+         onClick={handleGoBack}
+          style={{
+            margin: "30px",
+            padding: "10px",
+            width: "20vh",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          Back
+        </button>
+      </div>
     </div>
   );
 }
