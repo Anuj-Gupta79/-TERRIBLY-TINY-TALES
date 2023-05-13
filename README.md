@@ -16,7 +16,7 @@ X-axis = top 20 words with highest occurrence Y-axis = how many times they occur
  $ git clone https://github.com/Anuj-Gupta79/-TERRIBLY-TINY-TALES.git
 ``` 
 
-* Navigate to the project directly.
+* Navigate to the project directory.
 ``` 
  $ cd -TERRIBLY-TINY-TALES
 ```
